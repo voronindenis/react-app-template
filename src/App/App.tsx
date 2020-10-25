@@ -1,10 +1,19 @@
 import * as React from 'react';
-import logo from '../assets/logo.svg';
+import { CssBaseline } from '@material-ui/core';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import { storeR } from '../store';
+import theme from '../styles/theme';
+import { AppRouter } from '../routes/AppRouter';
 
-export const App = () => (
-  <div className="App">
-    <img src={logo} alt="logo" />
-    <h1>React App</h1>
-    <h2>This app is built on webpack!</h2>
-  </div>
-);
+export const App = () => {
+  const StoreProvider = storeR({});
+  return (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline>
+        <StoreProvider>
+          <AppRouter />
+        </StoreProvider>
+      </CssBaseline>
+    </MuiThemeProvider>
+  );
+};

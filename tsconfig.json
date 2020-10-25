@@ -54,5 +54,9 @@
     "scripts/**/*.js",
     "storybook-static",
     "src/stories"
-  ]
+  ],
+  "baseUrl": "./src",
+  "paths": {
+    "@types": ["@types/*"]
+  }
 }

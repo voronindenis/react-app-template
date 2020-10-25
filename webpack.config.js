@@ -11,9 +11,6 @@ const autoprefixer = require('autoprefixer');
 const packageLockJson = require('./package-lock.json');
 const packageJson = require('./package.json');
 
-const ProvidePluginConfig = new webpack.ProvidePlugin({
-  fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch/dist/fetch.umd',
-});
 const CopyWebpackPluginConfig = new CopyWebpackPlugin({ patterns: [{ from: 'src/assets', to: 'assets' }] });
 const HtmlWebPackPluginConfig = new HtmlWebPackPlugin({
   template: './src/index.template.html',
@@ -30,6 +27,7 @@ const HtmlWebPackPluginConfig = new HtmlWebPackPlugin({
       }), { host: { version: packageJson.version } }), null, 2),
   },
   filename: './index.html',
+  favicon: './src/assets/logo.svg',
 });
 
 const DefinePluginConfig = new webpack.DefinePlugin({
@@ -47,7 +45,7 @@ const WebpackPwaManifestConfig = new WebpackPwaManifest({
 
 module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
-  entry: ['whatwg-fetch', './src/index.tsx'],
+  entry: './src/index.tsx',
   output: {
     path: path.resolve('dist'),
     filename: '[name].bundle.[contenthash].js',
@@ -128,13 +126,15 @@ module.exports = {
     ],
   },
   plugins: [
-    ProvidePluginConfig,
     CopyWebpackPluginConfig,
     HtmlWebPackPluginConfig,
     DefinePluginConfig,
     WebpackPwaManifestConfig,
   ],
   resolve: {
+    alias: {
+      '@types': path.resolve(__dirname, 'src/@types'),
+    },
     extensions: ['.ts', '.tsx', '.js', '.json'],
     modules: [
       path.resolve('node_modules'),

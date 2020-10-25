@@ -16,9 +16,14 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-untyped-public-signature': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-use-before-define': ['error'],
     'import/prefer-default-export': 'off',
     'import/extensions': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.ts', '.tsx'] }],
+    'react/require-default-props': 'off',
+    'react/prop-types': 'off',
     'react/jsx-wrap-multilines': ['error', {
       declaration: 'parens',
       assignment: 'parens',
@@ -30,11 +35,9 @@ module.exports = {
     }],
     'object-curly-spacing': ['error', 'always'],
     'max-len': ['error', 120, 2, { ignoreComments: true }],
-    'react/jsx-filename-extension': [2, { extensions: ['.js', '.ts', '.tsx'] }],
     // https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md#how-to-use
     'no-use-before-define': 'off',
-    '@typescript-eslint/no-use-before-define': ['error'],
-    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
   },
   settings: {
     'import/resolver': {
